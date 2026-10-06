@@ -26,9 +26,9 @@ jobs:
 
       - name: Prepare static site
         run: |
-          mkdir -p _site/data
+          mkdir -p _site
           cp index.html styles.css script.js config.js telemetry.js _site/
-          cp data/database.json _site/data/
+          cp -R database _site/database
           touch _site/.nojekyll
 
       - name: Configure Pages

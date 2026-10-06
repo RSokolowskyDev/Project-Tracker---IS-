@@ -15,7 +15,7 @@ window.WORK_NAV_CONFIG = {
     AI: 'purple'
   },
   backend: {
-    dataFile: './data/database.json',
+    databasePath: './database',
     telemetryEndpoint: '',
     suggestionsEndpoint: ''
   },

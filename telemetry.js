@@ -66,7 +66,7 @@
   }
 
   // Events remain in memory for this page session and are summarized into
-  // data/database.json only when the user explicitly downloads that file.
+  // privacy-safe tracker_records rows only when the user downloads the tables.
 
   document.addEventListener('click', e => {
     const target = e.target.closest('button,a,[data-open-project],[data-open-role],[data-ticket-id],[data-item-card-id],summary');

@@ -1,6 +1,7 @@
 const CONFIG = window.WORK_NAV_CONFIG || {};
 const TICKET_STATUSES = CONFIG.ticketStatuses || ['New', 'In Progress', 'Waiting', 'Resolved'];
 const WORK_STATUSES = ['Planning', 'In Progress', 'Waiting', 'Blocked', 'Completed'];
+const DATABASE_TABLES = ['tracker_projects','tracker_project_items','tracker_records','tracker_feedback','tracker_time_entries'];
 
 let persistTimer=null, storageReady=false, hasUnsavedChanges=false, databaseSnapshot=null;
 function stateSnapshot(){return {projects,tickets,timeData,timer,dailyPlan}}
@@ -9,20 +10,44 @@ function persistNow(){
   hasUnsavedChanges=true;updateExportButton();return Promise.resolve(true);
 }
 function save(){clearTimeout(persistTimer);persistTimer=setTimeout(persistNow,180);updateBadge()}
-function exportDatabase(){
+function buildDatabaseTables(){
   const previous=databaseSnapshot?.telemetrySummary||{},current=window.WorkNavTelemetry?.getSummary?.()||{};
   const addCounts=(a={},b={})=>Object.fromEntries(Array.from(new Set([...Object.keys(a),...Object.keys(b)]),k=>[k,(Number(a[k])||0)+(Number(b[k])||0)]));
-  const db={schemaVersion:1,lastUpdatedAt:new Date().toISOString(),roles:structuredClone(databaseSnapshot?.roles||[{id:'IT',name:'IT'},{id:'AI',name:'AI'}]),projects:structuredClone(projects),tickets:structuredClone(tickets),dailyPlan:structuredClone(dailyPlan),timeData:structuredClone(timeData),timeEntries:structuredClone(databaseSnapshot?.timeEntries||[]),timer:structuredClone(timer),suggestions:structuredClone(suggestions),telemetrySummary:{schemaVersion:1,lastUpdatedAt:new Date().toISOString(),totalEvents:(Number(previous.totalEvents)||0)+(Number(current.totalEvents)||0),sessionCount:(Number(previous.sessionCount)||0)+(current.totalEvents?1:0),eventCounts:addCounts(previous.eventCounts,current.eventCounts),viewCounts:addCounts(previous.viewCounts,current.viewCounts),activeSecondsByView:addCounts(previous.activeSecondsByView,current.activeSecondsByView),scrollingSecondsByView:addCounts(previous.scrollingSecondsByView,current.scrollingSecondsByView),notes:'Aggregate interaction counts only. No raw click targets, keystrokes, or field values are retained.'},changeProposals:structuredClone(databaseSnapshot?.changeProposals||[]),learnedPreferences:structuredClone(databaseSnapshot?.learnedPreferences||[])};
-  const blob=new Blob([JSON.stringify(db,null,2)+'\\n'],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='database.json';document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
-  hasUnsavedChanges=false;updateExportButton();showToast('Downloaded database.json. Commit it to GitHub to keep these changes.');
+  const now=new Date().toISOString();
+  const table=(name,rows)=>({schemaVersion:1,table:name,lastUpdatedAt:now,rows});
+  const projectRows=projects.map(({tasks,...project})=>structuredClone(project));
+  const itemRows=projects.flatMap(project=>(project.tasks||[]).map(item=>({...structuredClone(item),projectId:project.id})));
+  const retainedRecords=structuredClone(databaseSnapshot?.records||[]).filter(row=>!['role','ticket','daily_plan','project_time_total','timer','telemetry_summary'].includes(row.recordType));
+  const roleRows=structuredClone(databaseSnapshot?.roles||[{id:'IT',name:'IT'},{id:'AI',name:'AI'}]).map(role=>({id:`role:${role.id}`,recordType:'role',roleId:role.id,name:role.name||role.id}));
+  const ticketRows=tickets.map(ticket=>({...structuredClone(ticket),id:'ticket:'+ticket.id,recordType:'ticket',ticketId:ticket.id}));
+  const planRows=dailyPlan.map((entry,index)=>({id:`daily-plan:${entry.projectId}:${entry.taskId}`,recordType:'daily_plan',position:index,...structuredClone(entry)}));
+  const timeRows=Object.entries(timeData).map(([projectId,seconds])=>({id:`project-time:${projectId}`,recordType:'project_time_total',projectId,seconds:Number(seconds)||0}));
+  const timerRow={id:'timer:active',recordType:'timer',...structuredClone(timer)};
+  const telemetrySummary={schemaVersion:1,lastUpdatedAt:now,totalEvents:(Number(previous.totalEvents)||0)+(Number(current.totalEvents)||0),sessionCount:(Number(previous.sessionCount)||0)+(current.totalEvents?1:0),eventCounts:addCounts(previous.eventCounts,current.eventCounts),viewCounts:addCounts(previous.viewCounts,current.viewCounts),activeSecondsByView:addCounts(previous.activeSecondsByView,current.activeSecondsByView),scrollingSecondsByView:addCounts(previous.scrollingSecondsByView,current.scrollingSecondsByView),notes:'Aggregate interaction counts only. No raw click targets, keystrokes, form values, messages, or personal identifiers are retained.'};
+  const telemetryRows=[{id:'telemetry-summary',recordType:'telemetry_summary',...telemetrySummary}];
+  if(current.totalEvents)telemetryRows.push({id:`telemetry-event:${Date.now()}`,recordType:'telemetry_event',eventType:'session_summary',occurredAt:now,totalEvents:Number(current.totalEvents)||0,eventCounts:structuredClone(current.eventCounts||{}),viewCounts:structuredClone(current.viewCounts||{}),activeSecondsByView:structuredClone(current.activeSecondsByView||{}),scrollingSecondsByView:structuredClone(current.scrollingSecondsByView||{})});
+  return {
+    tracker_projects:table('tracker_projects',projectRows),
+    tracker_project_items:table('tracker_project_items',itemRows),
+    tracker_records:table('tracker_records',[...retainedRecords,...roleRows,...ticketRows,...planRows,...timeRows,timerRow,...telemetryRows]),
+    tracker_feedback:table('tracker_feedback',structuredClone(suggestions)),
+    tracker_time_entries:table('tracker_time_entries',structuredClone(databaseSnapshot?.timeEntries||[]))
+  };
 }
-function updateExportButton(){const button=document.getElementById('export-data'),note=document.getElementById('repo-sync-note');if(!button)return;button.textContent=hasUnsavedChanges?'Download updated data':'Download data';if(note){note.classList.toggle('dirty',hasUnsavedChanges);note.innerHTML=hasUnsavedChanges?'Unsaved browser changes · download the updated <code>database.json</code> and commit it to GitHub.':'GitHub data snapshot · use <strong>Download data</strong> after editing here, then commit the file as <code>data/database.json</code>.'}}
+function downloadJson(name,value,delay){
+  setTimeout(()=>{const blob=new Blob([JSON.stringify(value,null,2)+'\\n'],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download=`${name}.json`;document.body.appendChild(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)},delay);
+}
+function exportDatabase(){
+  const tables=buildDatabaseTables();DATABASE_TABLES.forEach((name,index)=>downloadJson(name,tables[name],index*180));
+  hasUnsavedChanges=false;updateExportButton();showToast('Downloaded five database table files. Commit them to the database folder.');
+}
+function updateExportButton(){const button=document.getElementById('export-data'),note=document.getElementById('repo-sync-note');if(!button)return;button.textContent=hasUnsavedChanges?'Download updated tables':'Download database tables';if(note){note.classList.toggle('dirty',hasUnsavedChanges);note.innerHTML=hasUnsavedChanges?'Unsaved browser changes · download the five updated JSON tables and commit them to <code>database/</code>.':'Repository database snapshot · future agent updates are committed directly to the five tables in <code>database/</code>.'}}
 window.WorkNavDataDirty=()=>{if(storageReady){hasUnsavedChanges=true;updateExportButton()}};
 function escapeHtml(value){return String(value??'').replace(/[&<>'"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[ch]))}
 function statusSlug(status){return String(status).toLowerCase().replace(/[^a-z0-9]+/g,'-')}
 function statusClass(status){return `status-${statusSlug(status)}`}
 function normalizeTicket(t){return {...t,unread:Boolean(t.unread),description:t.description||'',affected:t.affected||'',attempted:t.attempted||'',nextAction:t.nextAction||'',updated:t.updated||t.created||''}}
-function normalizeProjects(){projects.forEach(p=>{p.tasks=(p.tasks||[]).map(t=>({id:t.id||crypto.randomUUID(),title:t.title||'Untitled item',status:WORK_STATUSES.includes(t.status)?t.status:'Planning',done:t.status==='Completed'||Boolean(t.done),notes:t.notes||'',source:t.source||'Manual',priority:t.priority||'Medium',estimatedMinutes:Number(t.estimatedMinutes)||60,dueDate:t.dueDate||'',dependencies:Array.isArray(t.dependencies)?t.dependencies:[],evidence:t.evidence||'',createdAt:t.createdAt||new Date().toISOString(),updatedAt:t.updatedAt||new Date().toISOString(),manualEdited:Boolean(t.manualEdited)}))})}
+function normalizeProjects(){projects.forEach(p=>{p.tasks=(p.tasks||[]).map(t=>({...t,id:t.id||crypto.randomUUID(),title:t.title||'Untitled item',status:WORK_STATUSES.includes(t.status)?t.status:'Planning',done:t.status==='Completed'||Boolean(t.done),notes:t.notes||'',source:t.source||'Manual',priority:t.priority||'Medium',estimatedMinutes:Number(t.estimatedMinutes)||60,dueDate:t.dueDate||'',dependencies:Array.isArray(t.dependencies)?t.dependencies:[],evidence:t.evidence||'',createdAt:t.createdAt||new Date().toISOString(),updatedAt:t.updatedAt||new Date().toISOString(),manualEdited:Boolean(t.manualEdited)}))})}
 function normalizeDailyPlan(){dailyPlan=dailyPlan.map(x=>{const p=projects.find(y=>y.id===x.projectId);const task=p?.tasks.find(t=>t.id===x.taskId);return p&&task?{time:x.time||'',projectId:p.id,taskId:task.id}:null}).filter(Boolean)}
 
 let projects=[];
@@ -395,19 +420,32 @@ if(timer.running)startTick();
 window.WorkNavTelemetry?.setView('dashboard');
 async function bootstrapPersistent(){
   try{
-    const response=await fetch(CONFIG.backend?.dataFile||'./data/database.json',{cache:'no-store'});
-    if(!response.ok)throw new Error('Database file unavailable');
-    const data=await response.json();databaseSnapshot=data;
-    projects=Array.isArray(data.projects)?data.projects:[];
-    tickets=Array.isArray(data.tickets)?data.tickets.map(normalizeTicket):[];
-    timeData=data.timeData&&typeof data.timeData==='object'?{...data.timeData}:{};
-    timer=data.timer||{projectId:'',running:false,startedAt:null};
-    dailyPlan=Array.isArray(data.dailyPlan)?data.dailyPlan:[];
-    suggestions=Array.isArray(data.suggestions)?data.suggestions:[];
+    const databasePath=CONFIG.backend?.databasePath||'./database';
+    const responses=await Promise.all(DATABASE_TABLES.map(name=>fetch(`${databasePath}/${name}.json`,{cache:'no-store'})));
+    if(responses.some(response=>!response.ok))throw new Error('Database table unavailable');
+    const tables=Object.fromEntries(await Promise.all(responses.map(async(response,index)=>[DATABASE_TABLES[index],await response.json()])));
+    for(const name of DATABASE_TABLES)if(tables[name]?.table!==name||!Array.isArray(tables[name]?.rows))throw new Error(`Invalid database table: ${name}`);
+    const projectRows=tables.tracker_projects.rows;
+    const itemRows=tables.tracker_project_items.rows;
+    const records=tables.tracker_records.rows;
+    const roles=records.filter(row=>row.recordType==='role').map(row=>({id:row.roleId||row.id.replace(/^role:/,''),name:row.name||row.roleId}));
+    const ticketRows=records.filter(row=>row.recordType==='ticket').map(row=>{const {recordType,id,ticketId,...ticket}=row;return {id:ticketId||id,...ticket}});
+    const planRows=records.filter(row=>row.recordType==='daily_plan').sort((a,b)=>(a.position||0)-(b.position||0)).map(({id,recordType,position,...entry})=>entry);
+    const timeRows=records.filter(row=>row.recordType==='project_time_total');
+    const timerRecord=records.find(row=>row.recordType==='timer');
+    const telemetryRecord=records.find(row=>row.recordType==='telemetry_summary');
+    const timeEntries=structuredClone(tables.tracker_time_entries.rows);
+    projects=projectRows.map(project=>({...structuredClone(project),tasks:itemRows.filter(item=>item.projectId===project.id).map(item=>structuredClone(item))}));
+    tickets=ticketRows.map(normalizeTicket);
+    timeData=Object.fromEntries(timeRows.map(row=>[row.projectId,Number(row.seconds)||0]));
+    timer=timerRecord?{projectId:timerRecord.projectId||'',running:Boolean(timerRecord.running),startedAt:timerRecord.startedAt||null}:{projectId:'',running:false,startedAt:null};
+    dailyPlan=planRows;
+    suggestions=structuredClone(tables.tracker_feedback.rows);
+    databaseSnapshot={records,roles,timeEntries,telemetrySummary:telemetryRecord||{},changeProposals:records.filter(row=>row.recordType==='change_proposal'),learnedPreferences:records.filter(row=>row.recordType==='learned_preference')};
     if(timer.running){timer={projectId:timer.projectId||'',running:false,startedAt:null}}
     normalizeProjects();normalizeDailyPlan();
     storageReady=true;hasUnsavedChanges=false;updateExportButton();
-  }catch(error){storageReady=false;projects=[];tickets=[];timeData={};timer={projectId:'',running:false,startedAt:null};dailyPlan=[];suggestions=[];showToast('Could not load data/database.json. Serve this folder through a local web server or GitHub Pages.');}
+  }catch(error){storageReady=false;projects=[];tickets=[];timeData={};timer={projectId:'',running:false,startedAt:null};dailyPlan=[];suggestions=[];showToast('Could not load the database tables. Serve this folder through a local web server or GitHub Pages.');}
   render();
 }
 bootstrapPersistent();

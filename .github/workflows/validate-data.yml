@@ -3,9 +3,9 @@ name: Validate tracker data
 on:
   push:
     branches: [main]
-    paths: ['data/database.json', 'scripts/validate-database.mjs', '.github/workflows/validate-data.yml']
+    paths: ['database/**', 'scripts/validate-database.mjs', '.github/workflows/validate-data.yml']
   pull_request:
-    paths: ['data/database.json', 'scripts/validate-database.mjs', '.github/workflows/validate-data.yml']
+    paths: ['database/**', 'scripts/validate-database.mjs', '.github/workflows/validate-data.yml']
 
 jobs:
   validate:

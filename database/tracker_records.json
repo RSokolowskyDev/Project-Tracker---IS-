@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "table": "tracker_records",
+  "lastUpdatedAt": "2026-10-06T22:14:44.813Z",
+  "rows": [
+    {
+      "id": "role:IT",
+      "recordType": "role",
+      "roleId": "IT",
+      "name": "IT"
+    },
+    {
+      "id": "role:AI",
+      "recordType": "role",
+      "roleId": "AI",
+      "name": "AI"
+    },
+    {
+      "id": "timer:active",
+      "recordType": "timer",
+      "projectId": "",
+      "running": false,
+      "startedAt": null
+    },
+    {
+      "id": "telemetry-summary",
+      "recordType": "telemetry_summary",
+      "schemaVersion": 1,
+      "lastUpdatedAt": "2026-10-06T17:49:55.927Z",
+      "totalEvents": 74,
+      "sessionCount": 6,
+      "eventCounts": {
+        "drop": 2,
+        "scroll_summary": 17,
+        "page_view": 11,
+        "session_start": 9,
+        "visible": 9,
+        "view_summary": 21,
+        "drag_start": 2,
+        "click": 3
+      },
+      "viewCounts": {
+        "role": 6,
+        "project": 10,
+        "dashboard": 58
+      },
+      "notes": "Aggregate counts only. No raw click target text or field values are retained."
+    }
+  ]
+}
