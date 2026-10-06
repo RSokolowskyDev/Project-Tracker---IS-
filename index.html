@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Work Navigator | Interior Solutions</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <div class="brand-row">
+        <button class="brand" data-nav="dashboard" aria-label="Go to dashboard">
+          <span class="brand-mark">IS</span>
+          <span><strong>Work Navigator</strong><small>IT + AI</small></span>
+        </button>
+        <div class="header-actions">
+          <button class="icon-button" id="ticket-bell" title="Ticket inbox">🔔 <span id="ticket-badge" class="badge">0</span></button>
+          <button class="primary" id="new-project-btn">+ Project</button>
+          <button class="secondary" id="export-data" type="button" title="Download the current database JSON for a GitHub commit">Download data</button>
+        </div>
+      </div>
+      <nav class="top-nav" id="top-nav">
+        <button class="active" data-nav="dashboard">Dashboard</button>
+        <button data-nav="daily">Daily Plan</button>
+        <button data-nav="role" data-role="IT"><span class="dot it"></span>IT</button>
+        <button data-nav="role" data-role="AI"><span class="dot ai"></span>AI</button>
+        <button data-nav="tickets">Tickets</button>
+        <button data-nav="suggestions">Suggestions</button>
+      </nav>
+    </header>
+
+    <main>
+      <div class="repo-sync-note" id="repo-sync-note">GitHub data snapshot · use <strong>Download data</strong> after editing here, then commit the file as <code>data/database.json</code>.</div>
+      <div id="breadcrumb" class="breadcrumb"></div>
+      <section id="content"></section>
+    </main>
+  </div>
+
+  <div id="project-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head"><h2>New project</h2><button class="icon-button" id="close-project-modal">×</button></div>
+      <form id="project-form" class="form-grid">
+        <label>Project name<input name="name" required /></label>
+        <label>Role<select name="role"><option>IT</option><option>AI</option></select></label>
+        <label>Status<select name="status"><option>In Progress</option><option>Planning</option><option>Waiting</option><option>Blocked</option><option>Completed</option></select></label>
+        <label>Color<select name="color"><option value="blue">Blue</option><option value="green">Green</option><option value="orange">Orange</option><option value="purple">Purple</option><option value="red">Red</option></select></label>
+        <label class="full">Summary<textarea name="summary" rows="3"></textarea></label>
+        <label class="full">Who is impacted?<input name="impact" /></label>
+        <label class="full">What do they need?<input name="needs" /></label>
+        <div class="modal-actions full"><button type="button" class="secondary" id="cancel-project-modal">Cancel</button><button class="primary" type="submit">Create</button></div>
+      </form>
+    </div>
+  </div>
+
+  <div id="ticket-modal" class="modal-backdrop hidden">
+    <div class="modal ticket-modal">
+      <div class="modal-head">
+        <div>
+          <div class="eyebrow">Ticket details</div>
+          <h2 id="ticket-modal-title">Ticket</h2>
+        </div>
+        <button class="icon-button" id="close-ticket-modal" aria-label="Close ticket details">×</button>
+      </div>
+      <form id="ticket-form" class="form-grid">
+        <input type="hidden" name="id" />
+        <label>Status
+          <select name="status"></select>
+        </label>
+        <label>Priority
+          <select name="priority"><option>High</option><option>Medium</option><option>Low</option></select>
+        </label>
+        <label>Source<input name="source" /></label>
+        <label>Created<input name="created" /></label>
+        <label class="full">Title<input name="title" required /></label>
+        <label class="full">Description<textarea name="description" rows="4"></textarea></label>
+        <label class="full">Who is affected?<input name="affected" /></label>
+        <label class="full">What has been tried?<textarea name="attempted" rows="2"></textarea></label>
+        <label class="full">Next action<textarea name="nextAction" rows="2"></textarea></label>
+        <div class="ticket-detail-foot full">
+          <span id="ticket-modal-meta" class="muted"></span>
+          <div class="modal-actions">
+            <button type="button" class="secondary" id="cancel-ticket-modal">Cancel</button>
+            <button class="primary" type="submit">Save changes</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+  <script src="config.js"></script>
+  <script src="telemetry.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

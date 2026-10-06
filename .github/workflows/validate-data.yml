@@ -1,0 +1,20 @@
+name: Validate tracker data
+
+on:
+  push:
+    branches: [main]
+    paths: ['data/database.json', 'scripts/validate-database.mjs', '.github/workflows/validate-data.yml']
+  pull_request:
+    paths: ['data/database.json', 'scripts/validate-database.mjs', '.github/workflows/validate-data.yml']
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node scripts/validate-database.mjs
