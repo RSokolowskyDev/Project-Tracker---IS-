@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_records",
-  "lastUpdatedAt": "2026-10-06T22:14:44.813Z",
+  "lastUpdatedAt": "2026-10-06T22:40:01.192Z",
   "rows": [
     {
       "id": "role:IT",
@@ -45,6 +45,153 @@
         "dashboard": 58
       },
       "notes": "Aggregate counts only. No raw click target text or field values are retained."
+    },
+    {
+      "id": "learned-preference:actionable-operational-summaries",
+      "recordType": "learned_preference",
+      "statement": "Prefer tracker summaries that prioritize status changes, next actions, follow-ups, risks, and information retrieval over generic activity lists.",
+      "scope": "planning",
+      "confidence": "high",
+      "evidenceSummary": "An explicit multi-part feedback review repeatedly identified status reports, next actions, follow-up decisions, risk detection, and finding scattered information as the most valuable outcomes.",
+      "evidenceTypes": [
+        "explicit_feedback"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "learned-preference:concise-team-planning-view",
+      "recordType": "learned_preference",
+      "statement": "Keep team-facing planning views high level and limited to meaningful deliverables and activities in the next two to three weeks, with detailed intelligence available underneath.",
+      "scope": "planning",
+      "confidence": "high",
+      "evidenceSummary": "Explicit feedback requested a concise three-week team view and specifically rejected showing every open project when it lacks a meaningful near-term deliverable or activity.",
+      "evidenceTypes": [
+        "explicit_feedback"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "learned-preference:current-reconciled-status",
+      "recordType": "learned_preference",
+      "statement": "Prefer current operational status derived by reconciling available sources, while clearly flagging source-of-truth mismatches for correction.",
+      "scope": "projects",
+      "confidence": "high",
+      "evidenceSummary": "Explicit feedback described stale and incomplete project reporting, asked for a live refresh before reports, and stated that newer operational evidence should be used while outdated system records are separately flagged.",
+      "evidenceTypes": [
+        "explicit_feedback"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "learned-preference:transparent-date-provenance",
+      "recordType": "learned_preference",
+      "statement": "Distinguish confirmed dates, system-scheduled dates, and tracker-calculated dates; when no target exists, calculate a best estimate and request validation.",
+      "scope": "projects",
+      "confidence": "high",
+      "evidenceSummary": "Explicit feedback requested visible date provenance and confirmed that missing target dates should be calculated from the best available information but marked for validation.",
+      "evidenceTypes": [
+        "explicit_feedback"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "learned-preference:exception-first-attention",
+      "recordType": "learned_preference",
+      "statement": "Prefer attention views that suppress already acknowledged or actively tracked work and emphasize new, changed, stalled, missing, or at-risk items.",
+      "scope": "dashboard",
+      "confidence": "high",
+      "evidenceSummary": "Explicit feedback called already-tracked items noisy and asked for delta reporting, stalled-item alerts, missing-step detection, and a way to acknowledge known work.",
+      "evidenceTypes": [
+        "explicit_feedback"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "learned-preference:dashboard-primary-workspace",
+      "recordType": "learned_preference",
+      "statement": "Treat the dashboard as the primary orientation and decision workspace while monitoring whether deeper planning and ticket views gain sustained use.",
+      "scope": "navigation",
+      "confidence": "medium",
+      "evidenceSummary": "Across six summarized sessions, 58 of 74 recorded interactions occurred in the dashboard context, compared with 10 in project views and 6 in role views; no durable usage signal yet exists for the other top-level views.",
+      "evidenceTypes": [
+        "telemetry",
+        "observed_usage"
+      ],
+      "status": "monitoring",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "learned-preference:risk-adjusted-follow-up",
+      "recordType": "learned_preference",
+      "statement": "Prompt follow-up on customer-waiting work after about two days by default, with earlier escalation when delay threatens a critical commitment.",
+      "scope": "planning",
+      "confidence": "high",
+      "evidenceSummary": "Explicit feedback gave a two-day default for customer follow-up and asked that critical dependencies shorten the threshold.",
+      "evidenceTypes": [
+        "explicit_feedback"
+      ],
+      "status": "active",
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "change-proposal:trusted-status-reconciliation",
+      "recordType": "change_proposal",
+      "title": "Establish trusted status reconciliation",
+      "observedProblem": "The tracker cannot currently show whether project status is fresh, complete, or consistent across sources, so users may need to double-check reports before acting.",
+      "evidenceSummary": "Explicit feedback reported a stale status, incomplete workload coverage, and conflicting reliability across operational sources. The current project-item model stores a source label but has no freshness timestamp, verification state, conflict indicator, coverage check, or date provenance.",
+      "relatedFeedbackIds": [],
+      "classification": "high-level",
+      "expectedImpact": "Fewer incorrect statuses, dates, and owners; less duplicate verification; greater confidence in daily and team-facing reports.",
+      "validationPlan": "Pilot provenance and mismatch handling on a limited project set. Track incorrect statuses, wrong dates or owners, unresolved source conflicts, manual verification time, and user trust before expanding or adding integrations.",
+      "reversibility": "Use additive fields and a gated reconciliation view so the workflow can be disabled without removing existing project or item data.",
+      "status": "pending_approval",
+      "approvalRequired": true,
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "change-proposal:delta-exception-operational-views",
+      "recordType": "change_proposal",
+      "title": "Add delta and exception-focused operational views",
+      "observedProblem": "Current dashboard and planning views summarize present state but do not explain what changed, verify workload coverage, suppress acknowledged items, or audit what was omitted from a report.",
+      "evidenceSummary": "Explicit feedback prioritized a daily roll-up, a concise three-week team view, and a missed-item audit, while describing already-tracked work as noise. Aggregate telemetry also shows the dashboard is the dominant interaction context, making it the most relevant place to test an exception-first summary.",
+      "relatedFeedbackIds": [],
+      "classification": "high-level",
+      "expectedImpact": "Less rereading and manual searching, earlier detection of missed or stalled work, and more focused team discussions.",
+      "validationPlan": "Prototype read-only delta, coverage, acknowledgement, and omission-audit views. Compare missed items, false alerts, time spent reviewing, repeated manual searches, and follow-up timeliness against the current workflow.",
+      "reversibility": "Introduce the outputs as optional views without replacing the existing dashboard, Daily Plan, or project boards.",
+      "status": "pending_approval",
+      "approvalRequired": true,
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
+    },
+    {
+      "id": "change-proposal:project-document-lookup",
+      "recordType": "change_proposal",
+      "title": "Evaluate project document lookup",
+      "observedProblem": "Project work may require substantial manual searching for drawings and other files because the tracker does not expose authorized document locations or retrieval paths.",
+      "evidenceSummary": "Explicit feedback identified finding project drawings as a recurring time cost and suggested linked cloud access. The current interface and data model contain no document lookup or project-to-document reference.",
+      "relatedFeedbackIds": [],
+      "classification": "high-level",
+      "expectedImpact": "Faster information retrieval and fewer missed project artifacts, provided access controls and source boundaries remain intact.",
+      "validationPlan": "Start with a read-only proof of concept for a small set of non-sensitive project document references. Measure successful finds, search time, false matches, permission failures, and whether users still need to search manually.",
+      "reversibility": "Keep lookup read-only and feature-gated, with no document copying or permission changes; disable the view if results are not reliable.",
+      "status": "pending_approval",
+      "approvalRequired": true,
+      "createdAt": "2026-10-06T22:40:01.192Z",
+      "updatedAt": "2026-10-06T22:40:01.192Z"
     }
   ]
 }
