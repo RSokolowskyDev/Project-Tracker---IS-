@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-06T22:14:44.813Z",
+  "lastUpdatedAt": "2026-10-07T21:23:51.050Z",
   "rows": [
     {
       "id": "ds-1",
@@ -957,7 +957,7 @@
       "id": "phx-4",
       "projectId": "it-phoenix",
       "title": "Remove temporary VPN requirement",
-      "notes": "",
+      "notes": "VPN is still required for DC1 access from Arizona. Provision direct file access from Arizona without requiring VPN.",
       "description": "",
       "status": "Blocked",
       "done": false,
@@ -965,12 +965,12 @@
       "estimatedMinutes": 60,
       "dueDate": "",
       "dependencies": [],
-      "source": "Manual",
-      "evidence": "",
-      "aiGenerated": false,
+      "source": "Teams",
+      "evidence": "Teams updates at 2026-10-07T21:06:50Z and 2026-10-07T21:11:57Z confirmed the dependency and provisioning next step.",
+      "aiGenerated": true,
       "manualEdited": false,
       "createdAt": "2026-10-05T22:40:51.414Z",
-      "updatedAt": "2026-10-05T22:40:51.414Z"
+      "updatedAt": "2026-10-07T21:23:51.050Z"
     },
     {
       "id": "phx-5",
@@ -1047,6 +1047,25 @@
       "manualEdited": false,
       "createdAt": "2026-10-05T22:40:51.414Z",
       "updatedAt": "2026-10-05T22:40:51.414Z"
+    },
+    {
+      "id": "phx-6",
+      "projectId": "it-phoenix",
+      "title": "Prepare unused network cabinets for return",
+      "notes": "One assembled and one disassembled network cabinet were identified; onsite cleanup is repacking them for return.",
+      "description": "",
+      "status": "In Progress",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Teams",
+      "evidence": "Teams update at 2026-10-07T21:15:08Z confirmed the unused cabinets were identified and return preparation was underway.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-07T21:23:51.050Z",
+      "updatedAt": "2026-10-07T21:23:51.050Z"
     }
   ]
 }
