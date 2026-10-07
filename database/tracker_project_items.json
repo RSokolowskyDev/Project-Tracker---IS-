@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-07T21:23:51.050Z",
+  "lastUpdatedAt": "2026-10-07T21:55:42.983Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1066,6 +1066,44 @@
       "manualEdited": false,
       "createdAt": "2026-10-07T21:23:51.050Z",
       "updatedAt": "2026-10-07T21:23:51.050Z"
+    },
+    {
+      "id": "phx-7",
+      "projectId": "it-phoenix",
+      "title": "Configure payment method for new Phoenix internet service",
+      "notes": "Review the available payment methods and finish setting up the selected option for the new Phoenix internet service.",
+      "description": "",
+      "status": "In Progress",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Teams",
+      "evidence": "Teams update at 2026-10-07T21:33:08Z confirmed payment-method review was underway for the new Phoenix internet service.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-07T21:55:42.983Z",
+      "updatedAt": "2026-10-07T21:55:42.983Z"
+    },
+    {
+      "id": "phx-8",
+      "projectId": "it-phoenix",
+      "title": "Resolve disputed Lumen termination charge",
+      "notes": "Lumen assessed an early-termination charge on the former Phoenix service; Interior Solutions disputed it and requested an explanation.",
+      "description": "",
+      "status": "Waiting",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Outlook",
+      "evidence": "Outlook updates at 2026-10-07T21:39:27Z and 2026-10-07T21:45:50Z confirmed the charge and the dispute.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-07T21:55:42.983Z",
+      "updatedAt": "2026-10-07T21:55:42.983Z"
     }
   ]
 }
