@@ -1,6 +1,16 @@
 {
   "schemaVersion": 1,
   "table": "tracker_feedback",
-  "lastUpdatedAt": "2026-10-06T22:14:44.813Z",
-  "rows": []
+  "lastUpdatedAt": "2026-10-07T16:55:43Z",
+  "rows": [
+    {
+      "id": "fb-20261007-project-item-save",
+      "text": "The Save button does not work when adding a new Project Item. The attempted item \"Test Speed Differences for Meeting on 10/8\" did not persist.",
+      "area": "Project Items",
+      "createdAt": "2026-10-07T16:55:43Z",
+      "reviewStatus": "Pending review",
+      "aiClassification": "Pending classification",
+      "resultingChange": ""
+    }
+  ]
 }
