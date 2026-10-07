@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-07T21:55:42.983Z",
+  "lastUpdatedAt": "2026-10-07T22:45:09.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1104,6 +1104,63 @@
       "manualEdited": false,
       "createdAt": "2026-10-07T21:55:42.983Z",
       "updatedAt": "2026-10-07T21:55:42.983Z"
+    },
+    {
+      "id": "phx-9",
+      "projectId": "it-phoenix",
+      "title": "Configure Phoenix firewall",
+      "notes": "Configure the Phoenix firewall after onsite staff reconnect the remote IT computer. Configuration has not started because the device is offline.",
+      "description": "",
+      "status": "Blocked",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Teams",
+      "evidence": "Teams updates at 2026-10-07T22:25:24Z and 2026-10-07T22:36:35Z confirmed configuration had not started and remote access was blocked pending an onsite reconnect.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-07T22:45:09.000Z",
+      "updatedAt": "2026-10-07T22:45:09.000Z"
+    },
+    {
+      "id": "sup-4",
+      "projectId": "it-support",
+      "title": "Review e-manage Outlook integration consent request",
+      "notes": "Review the e-manage|ONE Outlook Integration admin-consent request submitted by Todd Jensen.",
+      "description": "",
+      "status": "Planning",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "2026-11-06",
+      "dependencies": [],
+      "source": "Outlook",
+      "evidence": "Outlook notification received at 2026-10-07T22:38:32Z requested review of Todd Jensen's admin-consent request by 2026-11-06.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-07T22:45:09.000Z",
+      "updatedAt": "2026-10-07T22:45:09.000Z"
+    },
+    {
+      "id": "cm-7",
+      "projectId": "it-cmmc",
+      "title": "Review CrowdStrike renewal coverage and cost",
+      "notes": "Robert asked Ryan and Troy to respond to the vendor and compare current CrowdStrike cost and coverage in light of CMMC requirements.",
+      "description": "",
+      "status": "Planning",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Outlook",
+      "evidence": "Outlook update received at 2026-10-07T22:44:04Z asked Ryan and Troy to respond on the CrowdStrike renewal comparison.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-07T22:45:09.000Z",
+      "updatedAt": "2026-10-07T22:45:09.000Z"
     }
   ]
 }
