@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-07T22:45:09.000Z",
+  "lastUpdatedAt": "2026-10-08T14:45:09.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1161,6 +1161,25 @@
       "manualEdited": false,
       "createdAt": "2026-10-07T22:45:09.000Z",
       "updatedAt": "2026-10-07T22:45:09.000Z"
+    },
+    {
+      "id": "sup-5",
+      "projectId": "it-support",
+      "title": "Review HP Smart Solutions consent request",
+      "notes": "Review the HP Smart Solutions admin-consent request.",
+      "description": "",
+      "status": "Planning",
+      "done": false,
+      "priority": "Medium",
+      "estimatedMinutes": 60,
+      "dueDate": "2026-11-07",
+      "dependencies": [],
+      "source": "Outlook",
+      "evidence": "Outlook notifications received at 2026-10-08T14:22:13Z, 2026-10-08T14:27:02Z, and 2026-10-08T14:31:31Z requested review of the same consent request by 2026-11-07.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-08T14:45:09.000Z",
+      "updatedAt": "2026-10-08T14:45:09.000Z"
     }
   ]
 }
