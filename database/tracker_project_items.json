@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-08T20:15:10.000Z",
+  "lastUpdatedAt": "2026-10-08T22:15:10.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1109,20 +1109,20 @@
       "id": "phx-9",
       "projectId": "it-phoenix",
       "title": "Configure Phoenix firewall",
-      "notes": "Configure the Phoenix firewall after onsite staff reconnect the remote IT computer. Configuration has not started because the device is offline.",
+      "notes": "Configure the Phoenix firewall now that the remote IT computer is online and accessible through HelpWire. Firewall configuration completion has not been confirmed.",
       "description": "",
-      "status": "Blocked",
+      "status": "To Do",
       "done": false,
       "priority": "Medium",
       "estimatedMinutes": 60,
       "dueDate": "",
       "dependencies": [],
       "source": "Teams",
-      "evidence": "Teams updates at 2026-10-07T22:25:24Z and 2026-10-07T22:36:35Z confirmed configuration had not started and remote access was blocked pending an onsite reconnect.",
+      "evidence": "Teams updates at 2026-10-08T21:57:01Z, 2026-10-08T21:57:19Z, and 2026-10-08T22:10:14Z confirmed the remote device was online, Ryan obtained access, and Troy was invited to the HelpWire account.",
       "aiGenerated": true,
       "manualEdited": false,
       "createdAt": "2026-10-07T22:45:09.000Z",
-      "updatedAt": "2026-10-07T22:45:09.000Z"
+      "updatedAt": "2026-10-08T22:15:10.000Z"
     },
     {
       "id": "sup-4",
@@ -1199,6 +1199,25 @@
       "manualEdited": false,
       "createdAt": "2026-10-08T20:15:10.000Z",
       "updatedAt": "2026-10-08T20:15:10.000Z"
+    },
+    {
+      "id": "sup-7",
+      "projectId": "it-support",
+      "title": "Help Julian and Josiah access eManage",
+      "notes": "Help Julian and Josiah get into eManage. Brian Buster requested assistance; the session was postponed and remains unscheduled.",
+      "description": "",
+      "status": "To Do",
+      "done": false,
+      "priority": "",
+      "estimatedMinutes": 0,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Teams",
+      "evidence": "Ryan accepted Brian Buster's request in Teams at 2026-10-07T20:47:13Z; a 2026-10-08T21:56:26Z follow-up confirmed it was deferred to another day.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-08T22:15:10.000Z",
+      "updatedAt": "2026-10-08T22:15:10.000Z"
     }
   ]
 }
