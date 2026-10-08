@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-08T14:45:09.000Z",
+  "lastUpdatedAt": "2026-10-08T20:15:10.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1180,6 +1180,25 @@
       "manualEdited": false,
       "createdAt": "2026-10-08T14:45:09.000Z",
       "updatedAt": "2026-10-08T14:45:09.000Z"
+    },
+    {
+      "id": "sup-6",
+      "projectId": "it-support",
+      "title": "Fix Red's eManage and VPN connection profiles",
+      "notes": "Help Red Carbonell repair the eManage and VPN connection profiles on her new computer.",
+      "description": "",
+      "status": "To Do",
+      "done": false,
+      "priority": "",
+      "estimatedMinutes": 0,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Teams",
+      "evidence": "Teams request from Red Carbonell at 2026-10-08T19:50:06Z.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-08T20:15:10.000Z",
+      "updatedAt": "2026-10-08T20:15:10.000Z"
     }
   ]
 }
