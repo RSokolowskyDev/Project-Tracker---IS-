@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-09T20:15:09.000Z",
+  "lastUpdatedAt": "2026-10-09T21:15:26.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1147,20 +1147,20 @@
       "id": "cm-7",
       "projectId": "it-cmmc",
       "title": "Review CrowdStrike renewal coverage and cost",
-      "notes": "Robert asked Ryan and Troy to respond to the vendor and compare current CrowdStrike cost and coverage in light of CMMC requirements.",
+      "notes": "Robert asked Ryan and Troy to coordinate directly with Esgar to schedule the CrowdStrike cost-and-coverage review.",
       "description": "",
-      "status": "Planning",
+      "status": "To Do",
       "done": false,
       "priority": "Medium",
       "estimatedMinutes": 60,
       "dueDate": "",
       "dependencies": [],
       "source": "Outlook",
-      "evidence": "Outlook update received at 2026-10-07T22:44:04Z asked Ryan and Troy to respond on the CrowdStrike renewal comparison.",
+      "evidence": "Outlook update received at 2026-10-07T22:44:04Z asked Ryan and Troy to respond on the CrowdStrike renewal comparison. Outlook follow-up received at 2026-10-09T21:08:00Z directed Ryan and Troy to arrange the review with Esgar.",
       "aiGenerated": true,
       "manualEdited": false,
       "createdAt": "2026-10-07T22:45:09.000Z",
-      "updatedAt": "2026-10-07T22:45:09.000Z"
+      "updatedAt": "2026-10-09T21:15:26.000Z"
     },
     {
       "id": "sup-5",
