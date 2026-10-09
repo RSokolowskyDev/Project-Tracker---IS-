@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-09T21:15:26.000Z",
+  "lastUpdatedAt": "2026-10-09T22:15:09.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1237,6 +1237,25 @@
       "manualEdited": false,
       "createdAt": "2026-10-09T19:45:10.000Z",
       "updatedAt": "2026-10-09T19:45:10.000Z"
+    },
+    {
+      "id": "phx-10",
+      "projectId": "it-phoenix",
+      "title": "Send Amazon receipt for first server cabinet",
+      "notes": "Send Robert Dasek the Amazon receipt for the first server cabinet order. The document sent during the review window was for a different order.",
+      "description": "",
+      "status": "To Do",
+      "done": false,
+      "priority": "",
+      "estimatedMinutes": 0,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Teams",
+      "evidence": "Teams messages at 2026-10-09T21:46:26Z and 2026-10-09T22:13:12Z showed Ryan sent documentation, but Robert clarified it was for a different order placed on 2026-08-15.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-09T22:15:09.000Z",
+      "updatedAt": "2026-10-09T22:15:09.000Z"
     }
   ]
 }
