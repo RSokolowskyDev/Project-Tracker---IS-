@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-09T14:15:09.000Z",
+  "lastUpdatedAt": "2026-10-09T16:45:10.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1109,20 +1109,20 @@
       "id": "phx-9",
       "projectId": "it-phoenix",
       "title": "Configure Phoenix firewall",
-      "notes": "Configure the Phoenix firewall now that the remote IT computer is online and accessible through HelpWire. Firewall configuration completion has not been confirmed.",
+      "notes": "Configure the Phoenix firewall after HelpWire access to the remote IT computer is restored. The remote software appears to be offline, and onsite reactivation was unavailable during the latest review window.",
       "description": "",
-      "status": "To Do",
+      "status": "Blocked",
       "done": false,
       "priority": "Medium",
       "estimatedMinutes": 60,
       "dueDate": "",
       "dependencies": [],
       "source": "Teams",
-      "evidence": "Teams updates at 2026-10-08T21:57:01Z, 2026-10-08T21:57:19Z, and 2026-10-08T22:10:14Z confirmed the remote device was online, Ryan obtained access, and Troy was invited to the HelpWire account.",
+      "evidence": "Teams updates at 2026-10-08T21:57:01Z, 2026-10-08T21:57:19Z, and 2026-10-08T22:10:14Z confirmed the remote device was online, Ryan obtained access, and Troy was invited to the HelpWire account. Teams updates at 2026-10-09T16:34:26Z and 2026-10-09T16:43:13Z confirmed remote access was no longer available and onsite reactivation could not be completed that day.",
       "aiGenerated": true,
       "manualEdited": false,
       "createdAt": "2026-10-07T22:45:09.000Z",
-      "updatedAt": "2026-10-08T22:15:10.000Z"
+      "updatedAt": "2026-10-09T16:45:10.000Z"
     },
     {
       "id": "sup-4",
