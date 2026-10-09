@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-09T18:45:10.000Z",
+  "lastUpdatedAt": "2026-10-09T19:45:10.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1218,6 +1218,25 @@
       "manualEdited": false,
       "createdAt": "2026-10-08T22:15:10.000Z",
       "updatedAt": "2026-10-08T22:15:10.000Z"
+    },
+    {
+      "id": "sup-8",
+      "projectId": "it-support",
+      "title": "Automate weekly Zapier invoice delivery",
+      "notes": "Automate weekly delivery of Zapier invoices and receipts to Robert Dasek.",
+      "description": "",
+      "status": "To Do",
+      "done": false,
+      "priority": "",
+      "estimatedMinutes": 0,
+      "dueDate": "",
+      "dependencies": [],
+      "source": "Outlook",
+      "evidence": "Outlook request from Robert Dasek at 2026-10-09T19:44:15Z requested automatic weekly delivery of Zapier invoices and receipts.",
+      "aiGenerated": true,
+      "manualEdited": false,
+      "createdAt": "2026-10-09T19:45:10.000Z",
+      "updatedAt": "2026-10-09T19:45:10.000Z"
     }
   ]
 }
