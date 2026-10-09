@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-08T22:15:10.000Z",
+  "lastUpdatedAt": "2026-10-09T14:15:09.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1052,7 +1052,7 @@
       "id": "phx-6",
       "projectId": "it-phoenix",
       "title": "Prepare unused network cabinets for return",
-      "notes": "One assembled and one disassembled network cabinet were identified; onsite cleanup is repacking them for return.",
+      "notes": "Two unused server racks were moved to the warehouse, and onsite staff confirmed they will send them out for return. Return completion has not been confirmed.",
       "description": "",
       "status": "In Progress",
       "done": false,
@@ -1061,11 +1061,11 @@
       "dueDate": "",
       "dependencies": [],
       "source": "Teams",
-      "evidence": "Teams update at 2026-10-07T21:15:08Z confirmed the unused cabinets were identified and return preparation was underway.",
+      "evidence": "Teams updates at 2026-10-09T13:49:47Z and 2026-10-09T13:57:24Z confirmed the return request, warehouse staging, and onsite acceptance of the shipment action.",
       "aiGenerated": true,
       "manualEdited": false,
       "createdAt": "2026-10-07T21:23:51.050Z",
-      "updatedAt": "2026-10-07T21:23:51.050Z"
+      "updatedAt": "2026-10-09T14:15:09.000Z"
     },
     {
       "id": "phx-7",
