@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "table": "tracker_project_items",
-  "lastUpdatedAt": "2026-10-09T16:45:10.000Z",
+  "lastUpdatedAt": "2026-10-09T18:45:10.000Z",
   "rows": [
     {
       "id": "ds-1",
@@ -1185,7 +1185,7 @@
       "id": "sup-6",
       "projectId": "it-support",
       "title": "Fix Red's eManage and VPN connection profiles",
-      "notes": "Help Red Carbonell repair the eManage and VPN connection profiles on her new computer.",
+      "notes": "Help Red Carbonell repair the eManage and VPN connection profiles on her new computer. A setup session is scheduled for 2:00 PM MDT on 2026-10-09.",
       "description": "",
       "status": "To Do",
       "done": false,
@@ -1194,11 +1194,11 @@
       "dueDate": "",
       "dependencies": [],
       "source": "Teams",
-      "evidence": "Teams request from Red Carbonell at 2026-10-08T19:50:06Z.",
+      "evidence": "Teams request from Red Carbonell at 2026-10-08T19:50:06Z; Ryan scheduled the setup session in Teams at 2026-10-09T18:31:49Z.",
       "aiGenerated": true,
       "manualEdited": false,
       "createdAt": "2026-10-08T20:15:10.000Z",
-      "updatedAt": "2026-10-08T20:15:10.000Z"
+      "updatedAt": "2026-10-09T18:45:10.000Z"
     },
     {
       "id": "sup-7",
